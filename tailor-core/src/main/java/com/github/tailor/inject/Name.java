@@ -5,7 +5,7 @@ package com.github.tailor.inject;
  * Date: 4/24/13
  * Time: 10:24 AM
  */
-public class Name {
+public final class Name {
 
     private String value;
 
