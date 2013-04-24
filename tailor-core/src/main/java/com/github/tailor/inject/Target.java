@@ -1,5 +1,7 @@
 package com.github.tailor.inject;
 
+import static com.github.tailor.inject.Type.raw;
+
 /**
  * User: Clover Yu
  * Date: 4/24/13
@@ -8,6 +10,14 @@ package com.github.tailor.inject;
 public final class Target {
 
     public static final Target ANY = targeting(Instance.ANY);
+
+    public static Target targeting( Class<?> type ) {
+        return targeting( raw( type ) );
+    }
+
+    public static Target targeting( Type<?> type ) {
+        return targeting( Instance.anyOf( type ) );
+    }
 
     public static Target targeting(Instance<?> instance) {
         return new Target(Instances.ANY, instance, Packages.ALL);

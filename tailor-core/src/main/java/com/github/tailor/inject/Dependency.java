@@ -5,6 +5,8 @@ import java.util.Iterator;
 
 import static com.github.tailor.inject.DIRuntimeException.DependencyCycleException;
 import static com.github.tailor.inject.DIRuntimeException.MoreFrequentExpiryException;
+import static com.github.tailor.inject.Emergence.emergence;
+import static com.github.tailor.inject.Instance.defaultInstanceOf;
 import static com.github.tailor.inject.Instance.instance;
 import static com.github.tailor.inject.Type.raw;
 
@@ -93,6 +95,18 @@ public final class Dependency<T> implements Parameter, Iterable<Injection> {
 
     public int injectionDepth() {
         return hierarchy.length;
+    }
+
+    public Dependency<T> injectingInto( Class<?> target ) {
+        return injectingInto( raw(target) );
+    }
+
+    public Dependency<T> injectingInto( Type<?> target ) {
+        return injectingInto( defaultInstanceOf(target) );
+    }
+
+    public Dependency<T> injectingInto( Instance<?> target ) {
+        return injectingInto( emergence( target, Expiry.NEVER ) );
     }
 
     public Dependency<T> injectingInto(Emergence<?> target) {
