@@ -136,6 +136,16 @@ public final class Packages {
                 && Arrays.equals(roots, other.roots);
     }
 
+    @Override
+    public boolean equals( Object obj ) {
+        return obj instanceof Packages && equalTo( ( (Packages) obj ) );
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode( roots );
+    }
+
     public Packages parents() {
         if ( rootDepth == 0 ) {
             return this;
