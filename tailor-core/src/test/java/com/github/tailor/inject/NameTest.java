@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Matchers;
 
+import static com.github.tailor.inject.Name.named;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -15,7 +17,12 @@ public class NameTest {
 
     @Test
     public void shouldEqualToTheExactSameName() {
-        assertTrue( Name.named( "foo" ).equalTo( Name.named( "foo" ) ) );
+        assertTrue( named("foo").equalTo(named("foo")) );
+    }
+
+    @Test
+    public void shouldNotEqualToTheDifferentName() {
+        assertFalse( named("foo").equalTo(named("bar")) );
     }
 
 }
