@@ -18,14 +18,14 @@ public class RootBinder extends ScopedBinder {
     }
 
     public RootBinder asDefault() {
-        return on( bind().asDefault() );
+        return on(bind().asDefault());
     }
 
-    protected RootBinder on( Bind bind ) {
-        return new RootBinder( bind );
+    protected RootBinder on(Bind bind) {
+        return new RootBinder(bind);
     }
 
-    public ScopedBinder per( Scope scope ) {
-        return new ScopedBinder( root, bind().per( scope ) );
+    public ScopedBinder per(Scope scope) {
+        return new ScopedBinder(root, bind().per(scope));
     }
 }

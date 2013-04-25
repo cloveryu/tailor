@@ -22,8 +22,8 @@ public class InstanceTest {
 
         @Override
         protected void declare() {
-            bind( CharSequence.class ).to( "bar" );
-            bind( Integer.class ).to( 42 );
+            bind(CharSequence.class).to("bar");
+            bind(Integer.class).to(42);
         }
 
     }
@@ -32,8 +32,8 @@ public class InstanceTest {
 
         @Override
         protected void declare() {
-            bind( String.class ).to( "foobar" );
-            bind( Float.class ).to( 42.0f );
+            bind(String.class).to("foobar");
+            bind(Float.class).to(42.0f);
         }
 
     }
@@ -42,8 +42,8 @@ public class InstanceTest {
 
         @Override
         protected void bootstrap() {
-            install( InstanceBindsModule1.class );
-            install( InstanceBindsModule2.class );
+            install(InstanceBindsModule1.class);
+            install(InstanceBindsModule2.class);
         }
 
     }
@@ -52,12 +52,12 @@ public class InstanceTest {
 
     @Test
     public void shouldBeInjectedBasedOnTheDependencyType() {
-        assertInjects( "bar", raw( CharSequence.class ) );
-        assertInjects( "foobar", raw( String.class ) );
-        assertInjects( 42, raw( Integer.class ) );
+        assertInjects("bar", raw(CharSequence.class));
+        assertInjects("foobar", raw(String.class));
+        assertInjects(42, raw(Integer.class));
     }
 
-    private <T> void assertInjects( T expected, Type<? extends T> dependencyType ) {
-        assertThat( injector.resolve( dependency( dependencyType ) ), is( expected ) );
+    private <T> void assertInjects(T expected, Type<? extends T> dependencyType) {
+        assertThat(injector.resolve(dependency(dependencyType)), is(expected));
     }
 }

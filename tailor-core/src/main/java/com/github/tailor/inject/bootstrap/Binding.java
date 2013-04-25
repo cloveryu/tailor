@@ -2,7 +2,10 @@ package com.github.tailor.inject.bootstrap;
 
 import com.github.tailor.inject.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static com.github.tailor.inject.bootstrap.Link.ListBindings;
 

@@ -34,6 +34,7 @@ public class ConstructorParameterBindsTest {
 
     private static class Bar {
         final String foo;
+
         @SuppressWarnings("unused")
         Bar(String foo, Integer baz) {
             this.foo = foo;
@@ -43,6 +44,7 @@ public class ConstructorParameterBindsTest {
     private static class Baz {
         final String foo;
         final String bar;
+
         @SuppressWarnings("unused")
         Baz(String foo, String bar) {
             this.foo = foo;
@@ -53,6 +55,7 @@ public class ConstructorParameterBindsTest {
     private static class Qux {
         final Serializable value;
         final CharSequence sequence;
+
         @SuppressWarnings("unused")
         Qux(Serializable value, CharSequence sequence) {
             this.value = value;

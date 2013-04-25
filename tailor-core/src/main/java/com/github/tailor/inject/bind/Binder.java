@@ -6,7 +6,7 @@ import java.lang.reflect.Constructor;
 
 import static com.github.tailor.inject.Instance.defaultInstanceOf;
 import static com.github.tailor.inject.Instance.instance;
-import static com.github.tailor.inject.util.Metaclass.*;
+import static com.github.tailor.inject.util.Metaclass.metaclass;
 
 /**
  * User: Clover Yu
@@ -53,16 +53,16 @@ public class Binder {
         b.bindings.add(resource, supplier, b.scope, b.source);
     }
 
-    public <T> TypedBinder<T> autobind( Class<T> type ) {
-        return autobind( Type.raw( type ) );
+    public <T> TypedBinder<T> autobind(Class<T> type) {
+        return autobind(Type.raw(type));
     }
 
-    public <T> TypedBinder<T> autobind( Type<T> type ) {
-        return on( bind().autobinding().asAuto() ).bind( type );
+    public <T> TypedBinder<T> autobind(Type<T> type) {
+        return on(bind().autobinding().asAuto()).bind(type);
     }
 
-    protected Binder on( Bind bind ) {
-        return new Binder( root, bind );
+    protected Binder on(Bind bind) {
+        return new Binder(root, bind);
     }
 
     public static class TypedBinder<T> {
@@ -101,19 +101,19 @@ public class Binder {
             to(binder.bind().inspector.constructorFor(resource.getType().getRawType()));
         }
 
-        public void toConstructor( Parameter... parameters ) {
-            toConstructor( getType().getRawType(), parameters );
+        public void toConstructor(Parameter... parameters) {
+            toConstructor(getType().getRawType(), parameters);
         }
 
         protected final Type<T> getType() {
             return resource.getType();
         }
 
-        public void toConstructor( Class<? extends T> impl, Parameter... parameters ) {
-            if (metaclass(impl).undeterminable() ) {
-                throw new IllegalArgumentException( "Not a constructable type: " + impl );
+        public void toConstructor(Class<? extends T> impl, Parameter... parameters) {
+            if (metaclass(impl).undeterminable()) {
+                throw new IllegalArgumentException("Not a constructable type: " + impl);
             }
-            to( SuppliedBy.costructor( binder.bind().inspector.constructorFor( impl ), parameters ) );
+            to(SuppliedBy.costructor(binder.bind().inspector.constructorFor(impl), parameters));
         }
     }
 

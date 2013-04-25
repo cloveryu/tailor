@@ -146,8 +146,8 @@ public class Bootstrap {
 
     }
 
-    public static <T> T instance( Injectron<T> injectron ) {
-        return injectron.instanceFor( dependency( injectron.getResource().getInstance() ) );
+    public static <T> T instance(Injectron<T> injectron) {
+        return injectron.instanceFor(dependency(injectron.getResource().getInstance()));
     }
 
 }

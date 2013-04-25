@@ -1,8 +1,6 @@
 package com.github.tailor.inject;
 
 import com.github.tailor.inject.bind.BindSuite;
-import com.github.tailor.inject.bind.ConstructorParameterBindsTest;
-import com.github.tailor.inject.bind.PrimitiveBindsTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -13,6 +11,6 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses(value = {DeclarationTypeTest.class, NameTest.class, PackagesTest.class, TargetTest.class, TypeTest.class,
-        BindSuite.class })
+        BindSuite.class})
 public class TailorSuite {
 }

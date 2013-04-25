@@ -15,72 +15,72 @@ public class DeclarationTypeTest {
 
     @Test
     public void shouldNotReplacedByExplicitGivenExplicit() {
-        assertFalse( EXPLICIT.replacedBy( EXPLICIT ) );
+        assertFalse(EXPLICIT.replacedBy(EXPLICIT));
     }
 
     @Test
     public void shouldClashesWithExplicitGivenExplicit() {
-        assertTrue( EXPLICIT.clashesWith( EXPLICIT ) );
+        assertTrue(EXPLICIT.clashesWith(EXPLICIT));
     }
 
     @Test
     public void shouldClashesWithMultipleGivenExplicit() {
-        assertTrue( EXPLICIT.clashesWith( MULTI ) );
-        assertTrue( MULTI.clashesWith( EXPLICIT ) );
+        assertTrue(EXPLICIT.clashesWith(MULTI));
+        assertTrue(MULTI.clashesWith(EXPLICIT));
     }
 
     @Test
     public void shouldBeReplacedByMultiGivenImplicit() {
-        assertTrue( IMPLICIT.replacedBy( MULTI ) );
+        assertTrue(IMPLICIT.replacedBy(MULTI));
     }
 
     @Test
     public void shouldBeReplacedByMultiGivenDefault() {
-        assertTrue( DEFAULT.replacedBy( MULTI ) );
+        assertTrue(DEFAULT.replacedBy(MULTI));
     }
 
     @Test
     public void shouldBeReplacedByMultiGivenAuto() {
-        assertTrue( AUTO.replacedBy( MULTI ) );
+        assertTrue(AUTO.replacedBy(MULTI));
     }
 
     @Test
     public void shouldReplacedByAutoGivenDefault() {
-        assertTrue( DEFAULT.replacedBy( AUTO ) );
+        assertTrue(DEFAULT.replacedBy(AUTO));
     }
 
     @Test
     public void shouldReplacedByMultiGivenDefault() {
-        assertTrue( DEFAULT.replacedBy( MULTI ) );
+        assertTrue(DEFAULT.replacedBy(MULTI));
     }
 
     @Test
     public void shouldReplacedByExplicitGivenDefault() {
-        assertTrue( DEFAULT.replacedBy( EXPLICIT ) );
+        assertTrue(DEFAULT.replacedBy(EXPLICIT));
     }
 
     @Test
     public void shouldNotReplacedByExplicitGivenRequired() {
-        assertFalse( REQUIRED.replacedBy( EXPLICIT ) );
+        assertFalse(REQUIRED.replacedBy(EXPLICIT));
     }
 
     @Test
     public void shouldNotClashesWithRequiredGivenRequired() {
-        assertFalse( REQUIRED.clashesWith( REQUIRED ) );
+        assertFalse(REQUIRED.clashesWith(REQUIRED));
     }
 
     @Test
     public void shouldClashesWithDefaultGivenDefault() {
-        assertTrue( DEFAULT.clashesWith( DEFAULT ) );
+        assertTrue(DEFAULT.clashesWith(DEFAULT));
     }
 
     @Test
     public void shouldNotClashesWithAutoGivenAuto() {
-        assertFalse( AUTO.clashesWith( AUTO ) );
+        assertFalse(AUTO.clashesWith(AUTO));
     }
 
     @Test
     public void shouldReplacedByImplicitGivenImplicit() {
-        assertTrue( IMPLICIT.replacedBy( IMPLICIT ) );
+        assertTrue(IMPLICIT.replacedBy(IMPLICIT));
     }
 }

@@ -7,7 +7,7 @@ package com.github.tailor.inject.bind;
  */
 public class ScopedBinder extends Binder {
 
-    ScopedBinder( RootBinder root, Bind bind ) {
-        super( root, bind );
+    ScopedBinder(RootBinder root, Bind bind) {
+        super(root, bind);
     }
 }

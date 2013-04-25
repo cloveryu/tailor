@@ -2,7 +2,9 @@ package com.github.tailor.inject.util;
 
 import com.github.tailor.inject.*;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.IdentityHashMap;
+import java.util.Map;
 
 import static com.github.tailor.inject.DIRuntimeException.NoSuchResourceException;
 import static com.github.tailor.inject.Emergence.emergence;

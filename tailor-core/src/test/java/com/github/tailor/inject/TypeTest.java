@@ -19,69 +19,69 @@ import static org.junit.Assert.*;
  */
 public class TypeTest {
 
-    @SuppressWarnings ( "unused" )
+    @SuppressWarnings("unused")
     private Set<String> aStringSet;
 
     @Test
     public void shouldReturnCorrectTypeName() throws Exception {
-        Type<List> listType = raw(List.class).parameterized( String.class );
+        Type<List> listType = raw(List.class).parameterized(String.class);
         assertThat(listType.toString(), is("java.util.List<java.lang.String>"));
 
         listType = raw(List.class).parameterized(raw(String.class).asLowerBound());
-        assertThat( listType.toString(), is( "java.util.List<? extends java.lang.String>" ) );
+        assertThat(listType.toString(), is("java.util.List<? extends java.lang.String>"));
 
-        Field stringSet = TypeTest.class.getDeclaredField( "aStringSet" );
-        assertThat( fieldType(stringSet).toString(), is("java.util.Set<java.lang.String>" ) );
+        Field stringSet = TypeTest.class.getDeclaredField("aStringSet");
+        assertThat(fieldType(stringSet).toString(), is("java.util.Set<java.lang.String>"));
     }
 
     @Test
     public void shouldBeAssignableToNumberGivenInteger() {
-        Type<Integer> integer = raw( Integer.class );
-        Type<Number> number = raw( Number.class );
+        Type<Integer> integer = raw(Integer.class);
+        Type<Number> number = raw(Number.class);
         assertTrue(integer.isAssignableTo(number));
     }
 
     @Test
     public void shouldNotBeAssignableToIntegerGivenNumber() {
-        Type<Integer> integer = raw( Integer.class );
-        Type<Number> number = raw( Number.class );
-        assertFalse( number.isAssignableTo( integer ) );
+        Type<Integer> integer = raw(Integer.class);
+        Type<Number> number = raw(Number.class);
+        assertFalse(number.isAssignableTo(integer));
     }
 
     @Test
     public void shouldNotBeAssignableBetweenGenericWithExactRawType() {
-        Type<List> listOfIntegers = raw( List.class ).parameterized(Integer.class);
-        Type<List> listOfNumbers = raw( List.class ).parameterized(Number.class);
-        assertFalse( listOfIntegers.isAssignableTo( listOfNumbers ) );
-        assertFalse( listOfNumbers.isAssignableTo( listOfIntegers ) );
+        Type<List> listOfIntegers = raw(List.class).parameterized(Integer.class);
+        Type<List> listOfNumbers = raw(List.class).parameterized(Number.class);
+        assertFalse(listOfIntegers.isAssignableTo(listOfNumbers));
+        assertFalse(listOfNumbers.isAssignableTo(listOfIntegers));
     }
 
     @Test
     public void shouldReturnCorrectTypeNameGivenGenericArrays() {
-        Type<Class[]> classArray = raw( Class[].class ).parameterized( String.class );
-        assertThat( classArray.elementType().toString(), is( "java.lang.Class<java.lang.String>" ) );
-        assertThat( classArray.toString(), is( "java.lang.Class<java.lang.String>[]" ) );
+        Type<Class[]> classArray = raw(Class[].class).parameterized(String.class);
+        assertThat(classArray.elementType().toString(), is("java.lang.Class<java.lang.String>"));
+        assertThat(classArray.toString(), is("java.lang.Class<java.lang.String>[]"));
     }
 
     @Test
     public void shouldReturnCorrectTypeNameGivenArrayType() {
-        Type<? extends Number> type = raw( Number.class ).asLowerBound();
-        assertThat( type.getArrayType().toString(), is( "? extends java.lang.Number[]" ) );
+        Type<? extends Number> type = raw(Number.class).asLowerBound();
+        assertThat(type.getArrayType().toString(), is("? extends java.lang.Number[]"));
     }
 
     @Test
     public void shouldContainsGenericSuperInterfacesAsSupertype() {
-        Type<? super Integer>[] integerSupertypes = Type.raw( Integer.class ).supertypes();
-        assertContains( integerSupertypes, Type.raw(Comparable.class ).parameterized(Integer.class) );
+        Type<? super Integer>[] integerSupertypes = Type.raw(Integer.class).supertypes();
+        assertContains(integerSupertypes, Type.raw(Comparable.class).parameterized(Integer.class));
     }
 
-    private static void assertContains( Type<?>[] actual, Type<?> expected ) {
-        for ( Type<?> type : actual ) {
-            if ( type.equalTo( expected ) ) {
+    private static void assertContains(Type<?>[] actual, Type<?> expected) {
+        for (Type<?> type : actual) {
+            if (type.equalTo(expected)) {
                 return;
             }
         }
-        fail( Arrays.toString( actual ) + " should have contained: " + expected );
+        fail(Arrays.toString(actual) + " should have contained: " + expected);
     }
 
 }

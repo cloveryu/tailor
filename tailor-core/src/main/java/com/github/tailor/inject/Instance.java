@@ -51,7 +51,7 @@ public final class Instance<T> implements Parameter {
         return name.isAny() && type.equalTo(ANY.type);
     }
 
-    public <E> Instance<E> typed( Type<E> type ) {
-        return new Instance<E>( name, type );
+    public <E> Instance<E> typed(Type<E> type) {
+        return new Instance<E>(name, type);
     }
 }

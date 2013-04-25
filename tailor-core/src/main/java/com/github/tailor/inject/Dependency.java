@@ -97,16 +97,16 @@ public final class Dependency<T> implements Parameter, Iterable<Injection> {
         return hierarchy.length;
     }
 
-    public Dependency<T> injectingInto( Class<?> target ) {
-        return injectingInto( raw(target) );
+    public Dependency<T> injectingInto(Class<?> target) {
+        return injectingInto(raw(target));
     }
 
-    public Dependency<T> injectingInto( Type<?> target ) {
-        return injectingInto( defaultInstanceOf(target) );
+    public Dependency<T> injectingInto(Type<?> target) {
+        return injectingInto(defaultInstanceOf(target));
     }
 
-    public Dependency<T> injectingInto( Instance<?> target ) {
-        return injectingInto( emergence( target, Expiry.NEVER ) );
+    public Dependency<T> injectingInto(Instance<?> target) {
+        return injectingInto(emergence(target, Expiry.NEVER));
     }
 
     public Dependency<T> injectingInto(Emergence<?> target) {

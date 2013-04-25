@@ -12,12 +12,12 @@ public final class Target {
 
     public static final Target ANY = targeting(Instance.ANY);
 
-    public static Target targeting( Class<?> type ) {
-        return targeting( raw( type ) );
+    public static Target targeting(Class<?> type) {
+        return targeting(raw(type));
     }
 
-    public static Target targeting( Type<?> type ) {
-        return targeting( Instance.anyOf( type ) );
+    public static Target targeting(Type<?> type) {
+        return targeting(Instance.anyOf(type));
     }
 
     public static Target targeting(Instance<?> instance) {
@@ -83,11 +83,11 @@ public final class Target {
         return type.isInterface() || type.isAbstract() ? targetType.isAssignableTo(type) : targetType.equalTo(type);
     }
 
-    public Target inPackageOf( Class<?> type ) {
-        return in( packageOf( type ) );
+    public Target inPackageOf(Class<?> type) {
+        return in(packageOf(type));
     }
 
-    public Target in( Packages packages ) {
-        return new Target( parents, instance, packages );
+    public Target in(Packages packages) {
+        return new Target(parents, instance, packages);
     }
 }

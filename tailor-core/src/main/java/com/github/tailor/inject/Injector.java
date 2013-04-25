@@ -1,8 +1,6 @@
 package com.github.tailor.inject;
 
-import static com.github.tailor.inject.DIRuntimeException.DependencyCycleException;
-import static com.github.tailor.inject.DIRuntimeException.MoreFrequentExpiryException;
-import static com.github.tailor.inject.DIRuntimeException.NoSuchResourceException;
+import static com.github.tailor.inject.DIRuntimeException.*;
 
 /**
  * User: Clover Yu

@@ -1,12 +1,11 @@
 package com.github.tailor.inject.bind;
 
-import com.github.tailor.inject.DIRuntimeException;
 import com.github.tailor.inject.Injector;
 import com.github.tailor.inject.Name;
 import com.github.tailor.inject.bootstrap.Bootstrap;
 import org.junit.Test;
 
-import static com.github.tailor.inject.DIRuntimeException.*;
+import static com.github.tailor.inject.DIRuntimeException.NoSuchResourceException;
 import static com.github.tailor.inject.Dependency.dependency;
 import static com.github.tailor.inject.Name.named;
 import static org.hamcrest.CoreMatchers.is;
@@ -23,9 +22,9 @@ public class PrimitiveBindsTest {
 
         @Override
         protected void declare() {
-            bind( int.class ).to( 1 );
-            bind( named( "pi" ), float.class ).to(3.1415f);
-            bind( Circle.class ).toConstructor();
+            bind(int.class).to(1);
+            bind(named("pi"), float.class).to(3.1415f);
+            bind(Circle.class).toConstructor();
         }
 
     }
@@ -35,7 +34,7 @@ public class PrimitiveBindsTest {
         final Integer r;
         final float pi;
 
-        Circle( Integer r, float pi ) {
+        Circle(Integer r, float pi) {
             super();
             this.r = r;
             this.pi = pi;
@@ -47,31 +46,31 @@ public class PrimitiveBindsTest {
 
     @Test
     public void shouldWorkAsWrapperClassGivenPrimitiveInt() {
-        assertThat( injector.resolve( dependency(Integer.class) ), is( 1 ) );
-        assertThat( injector.resolve( dependency(int.class) ), is( 1 ) );
+        assertThat(injector.resolve(dependency(Integer.class)), is(1));
+        assertThat(injector.resolve(dependency(int.class)), is(1));
     }
 
     @Test
     public void shouldWorkAsWrapperClassGivenPrimitiveFloat() {
-        assertThat( injector.resolve( dependency( Float.class ).named( "pi" ) ), is( 3.1415f ) );
-        assertThat( injector.resolve( dependency( float.class ).named( "pi" ) ), is( 3.1415f ) );
+        assertThat(injector.resolve(dependency(Float.class).named("pi")), is(3.1415f));
+        assertThat(injector.resolve(dependency(float.class).named("pi")), is(3.1415f));
     }
 
     @Test
     public void shouldWorkAsWrapperClassGivenPrimitiveWhenInjected() {
-        Circle circle = injector.resolve( dependency( Circle.class ) );
-        assertThat( circle.r, is( 1 ) );
-        assertThat( circle.pi, is( 3.1415f ) );
+        Circle circle = injector.resolve(dependency(Circle.class));
+        assertThat(circle.r, is(1));
+        assertThat(circle.pi, is(3.1415f));
     }
 
-    @Test ( expected = NoSuchResourceException.class )
+    @Test(expected = NoSuchResourceException.class)
     public void shouldThrowExceptionWhenResolvingAnUnboundDependency() {
-        injector.resolve( dependency( String.class ) );
+        injector.resolve(dependency(String.class));
     }
 
-    @Test ( expected = NoSuchResourceException.class )
+    @Test(expected = NoSuchResourceException.class)
     public void shouldThrowExceptionWhenResolvingAnUnboundDependencyWithBoundRawType() {
-        injector.resolve( dependency( float.class ).named( Name.DEFAULT ) );
+        injector.resolve(dependency(float.class).named(Name.DEFAULT));
     }
 
 }
