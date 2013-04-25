@@ -1,11 +1,13 @@
 package com.github.tailor.inject.bind;
 
 import com.github.tailor.inject.*;
+import com.github.tailor.inject.util.Metaclass;
 
 import java.lang.reflect.Constructor;
 
 import static com.github.tailor.inject.Instance.defaultInstanceOf;
 import static com.github.tailor.inject.Instance.instance;
+import static com.github.tailor.inject.util.Metaclass.*;
 
 /**
  * User: Clover Yu
@@ -86,6 +88,21 @@ public class Binder {
 
         public void toConstructor() {
             to(binder.bind().inspector.constructorFor(resource.getType().getRawType()));
+        }
+
+        public void toConstructor( Parameter... parameters ) {
+            toConstructor( getType().getRawType(), parameters );
+        }
+
+        protected final Type<T> getType() {
+            return resource.getType();
+        }
+
+        public void toConstructor( Class<? extends T> impl, Parameter... parameters ) {
+            if (metaclass(impl).undeterminable() ) {
+                throw new IllegalArgumentException( "Not a constructable type: " + impl );
+            }
+            to( SuppliedBy.costructor( binder.bind().inspector.constructorFor( impl ), parameters ) );
         }
     }
 }

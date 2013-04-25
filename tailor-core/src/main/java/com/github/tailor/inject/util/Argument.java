@@ -2,6 +2,8 @@ package com.github.tailor.inject.util;
 
 import com.github.tailor.inject.*;
 
+import static com.github.tailor.inject.Type.*;
+
 /**
  * User: Clover Yu
  * Date: 4/24/13
@@ -127,6 +129,23 @@ public final class Argument<T> implements Parameter {
             return context.resolve(dependency);
         }
         return context.resolve(constructed.instanced(instance));
+    }
+
+    public static <S, T extends S> Parameter asType( Class<S> supertype, Parameter parameter ) {
+        return asType( raw(supertype), parameter );
+    }
+
+    public static <S, T extends S> Parameter asType( Type<S> supertype, Parameter parameter ) {
+        Argument<T> arg = argumentFor( parameter );
+        return new Argument<S>( arg.constant, supertype, arg.instance, arg.dependency );
+    }
+
+    public static <T> Parameter constant( Class<T> type, T constant ) {
+        return constant( raw( type ), constant );
+    }
+
+    public static <T> Parameter constant( Type<T> type, T constant ) {
+        return new Argument<T>( constant, type, null, null );
     }
 
 }

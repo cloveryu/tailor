@@ -36,6 +36,10 @@ public class Bootstrap {
         return Invoke.constructor(Metaclass.accessible(Inspect.noArgsConstructor(type)));
     }
 
+    public static Suppliable<?>[] suppliables(Class<? extends Bundle> root) {
+        return Link.BUILDIN.link(Inspect.DEFAULT, modulariser().modularise(root));
+    }
+
     private static class BuildinBootstrapper implements Bootstrapper, Bundler, Modulariser {
 
         private final Map<Class<? extends Bundle>, Set<Class<? extends Bundle>>> bundleChildren = new IdentityHashMap<Class<? extends Bundle>, Set<Class<? extends Bundle>>>();

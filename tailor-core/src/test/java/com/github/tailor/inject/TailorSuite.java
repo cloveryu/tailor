@@ -1,5 +1,6 @@
 package com.github.tailor.inject;
 
+import com.github.tailor.inject.bind.ConstructorParameterBindsTest;
 import com.github.tailor.inject.bind.PrimitiveBindsTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -10,7 +11,7 @@ import org.junit.runners.Suite;
  * Time: 12:07 AM
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses( {DeclarationTypeTest.class, NameTest.class, PackagesTest.class, TargetTest.class, TypeTest.class,
-        PrimitiveBindsTest.class})
+@Suite.SuiteClasses( { DeclarationTypeTest.class, NameTest.class, PackagesTest.class, TargetTest.class, TypeTest.class,
+        PrimitiveBindsTest.class, ConstructorParameterBindsTest.class })
 public class TailorSuite {
 }
