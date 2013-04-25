@@ -3,10 +3,10 @@ package com.github.tailor.inject.bind;
 import com.github.tailor.inject.Injector;
 import com.github.tailor.inject.Name;
 import com.github.tailor.inject.bootstrap.Bootstrap;
-import com.github.tailor.inject.util.Scoped;
 import org.junit.Test;
 
 import static com.github.tailor.inject.Dependency.dependency;
+import static com.github.tailor.inject.util.Scoped.TARGET_INSTANCE;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsSame.sameInstance;
 import static org.junit.Assert.assertThat;
@@ -35,12 +35,11 @@ public class RobotLegsProblemBindsTest {
     static Name left = Name.named("left");
     static Name right = Name.named("right");
 
-    private static class RobotLegsProblemBindsModule
-            extends BinderModule {
+    private static class RobotLegsProblemBindsModule extends BinderModule {
 
         @Override
         protected void declare() {
-            per(Scoped.INJECTION).construct(Foot.class);
+            per(TARGET_INSTANCE).construct(Foot.class);
             bind(left, Leg.class).toConstructor();
             bind(right, Leg.class).toConstructor();
         }

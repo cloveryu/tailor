@@ -41,8 +41,8 @@ public final class Bind {
         return new Bind(bindings, inspector, source, scope, target);
     }
 
-    public Bind with( Target target ) {
-        return new Bind( bindings, inspector, source, scope, target );
+    public Bind with(Target target) {
+        return new Bind(bindings, inspector, source, scope, target);
     }
 
     public Bind asDefault() {
@@ -58,11 +58,11 @@ public final class Bind {
     }
 
     public Bind asMulti() {
-        return as( DeclarationType.MULTI );
+        return as(DeclarationType.MULTI);
     }
 
     public Bind asImplicit() {
-        return as( DeclarationType.IMPLICIT );
+        return as(DeclarationType.IMPLICIT);
     }
 
 }

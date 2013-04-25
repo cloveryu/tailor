@@ -18,15 +18,15 @@ public class ScopedBinder extends TargetedBinder {
         super(root, bind);
     }
 
-    public TargetedBinder injectingInto( Name name, Class<?> type ) {
-        return injectingInto( name, raw( type ) );
+    public TargetedBinder injectingInto(Name name, Class<?> type) {
+        return injectingInto(name, raw(type));
     }
 
-    public TargetedBinder injectingInto( Name name, Type<?> type ) {
-        return injectingInto( Instance.instance(name, type) );
+    public TargetedBinder injectingInto(Name name, Type<?> type) {
+        return injectingInto(Instance.instance(name, type));
     }
 
-    public TargetedBinder injectingInto( Instance<?> target ) {
-        return new TargetedBinder( root, bind().with( Target.targeting(target) ) );
+    public TargetedBinder injectingInto(Instance<?> target) {
+        return new TargetedBinder(root, bind().with(Target.targeting(target)));
     }
 }

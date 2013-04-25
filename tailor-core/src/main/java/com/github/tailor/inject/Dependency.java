@@ -128,11 +128,11 @@ public final class Dependency<T> implements Parameter, Iterable<Injection> {
     }
 
     private void ensureNotMoreFrequentExpiry(Injection injection) {
-//        final Expiry expiry = injection.getTarget().getExpiry();
-//        for (Injection parent : hierarchy) {
-//            if (expiry.moreFrequent(parent.getTarget().getExpiry())) {
-//                throw new MoreFrequentExpiryException(parent, injection);
-//            }
-//        }
+        final Expiry expiry = injection.getTarget().getExpiry();
+        for (Injection parent : hierarchy) {
+            if (expiry.moreFrequent(parent.getTarget().getExpiry())) {
+                throw new MoreFrequentExpiryException(parent, injection);
+            }
+        }
     }
 }
