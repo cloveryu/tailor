@@ -9,6 +9,7 @@ import org.junit.runners.Suite;
  * Time: 12:46 PM
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({PrimitiveBindsTest.class, ConstructorParameterBindsTest.class, BootstrapperTest.class, LinkerTest.class})
+@Suite.SuiteClasses({PrimitiveBindsTest.class, ConstructorParameterBindsTest.class, BootstrapperTest.class, LinkerTest.class,
+        InstanceTest.class, RobotLegsProblemBindsTest.class})
 public class BindSuite {
 }

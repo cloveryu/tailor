@@ -339,4 +339,10 @@ public final class Type<T> implements Parameter {
     public boolean isAbstract() {
         return Modifier.isAbstract(rawType.getModifiers());
     }
+
+    public boolean isUnidimensionalArray() {
+        return rawType.isArray() && !rawType.getComponentType().isArray();
+    }
 }
+
+

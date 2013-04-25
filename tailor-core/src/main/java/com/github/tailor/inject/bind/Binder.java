@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 
 import static com.github.tailor.inject.Instance.defaultInstanceOf;
 import static com.github.tailor.inject.Instance.instance;
+import static com.github.tailor.inject.Type.*;
 import static com.github.tailor.inject.util.Metaclass.metaclass;
 
 /**
@@ -29,7 +30,7 @@ public class Binder {
     }
 
     public <T> TypedBinder<T> bind(Class<T> type) {
-        return bind(Type.raw(type));
+        return bind(raw(type));
     }
 
     public <T> TypedBinder<T> bind(Type<T> type) {
@@ -41,7 +42,7 @@ public class Binder {
     }
 
     public <T> TypedBinder<T> bind(Name name, Class<T> type) {
-        return bind(name, Type.raw(type));
+        return bind(name, raw(type));
     }
 
     public <T> TypedBinder<T> bind(Name name, Type<T> type) {
@@ -53,16 +54,51 @@ public class Binder {
         b.bindings.add(resource, supplier, b.scope, b.source);
     }
 
-    public <T> TypedBinder<T> autobind(Class<T> type) {
-        return autobind(Type.raw(type));
-    }
-
-    public <T> TypedBinder<T> autobind(Type<T> type) {
-        return on(bind().autobinding().asAuto()).bind(type);
-    }
-
     protected Binder on(Bind bind) {
         return new Binder(root, bind);
+    }
+
+    public <T> TypedBinder<T> multibind( Class<T> type ) {
+        return multibind( raw(type) );
+    }
+
+    public <T> TypedBinder<T> multibind( Type<T> type ) {
+        return multibind( Instance.defaultInstanceOf(type) );
+    }
+
+    public <T> TypedBinder<T> multibind( Instance<T> instance ) {
+        return on( bind().asMulti() ).bind( instance );
+    }
+
+    public <T> TypedBinder<T> multibind( Name name, Class<T> type ) {
+        return multibind( instance( name, Type.raw( type ) ) );
+    }
+
+    public void construct( Class<?> type ) {
+        construct( ( defaultInstanceOf( raw( type ) ) ) );
+    }
+
+    public void construct( Instance<?> instance ) {
+        bind( instance ).toConstructor();
+    }
+
+    protected final <I> void implicitBindToConstructor( Instance<I> instance ) {
+        Class<I> impl = instance.getType().getRawType();
+        if ( metaclass( impl ).undeterminable() ) {
+            return;
+        }
+        Constructor<I> constructor = bind().inspector.constructorFor( impl );
+        if ( constructor != null ) {
+            implicit().with( Target.ANY ).bind( instance ).to( constructor );
+        }
+    }
+
+    protected final Binder implicit() {
+        return on( bind().asImplicit() );
+    }
+
+    protected Binder with( Target target ) {
+        return new Binder( root, bind().with( target ) );
     }
 
     public static class TypedBinder<T> {
@@ -86,6 +122,14 @@ public class Binder {
 
         public void to(Constructor<? extends T> constructor, Parameter... parameters) {
             to(SuppliedBy.costructor(constructor, parameters));
+        }
+
+        public <I extends T> void to( Name name, Class<I> type ) {
+            to( instance( name, raw( type ) ) );
+        }
+
+        public <I extends T> void to( Instance<I> instance ) {
+            to( supply( instance ) );
         }
 
         private TypedBinder<T> toConstant(T constant) {
@@ -114,6 +158,22 @@ public class Binder {
                 throw new IllegalArgumentException("Not a constructable type: " + impl);
             }
             to(SuppliedBy.costructor(binder.bind().inspector.constructorFor(impl), parameters));
+        }
+
+        <I> Supplier<I> supply( Instance<I> instance ) {
+            if ( !resource.getInstance().equalTo( instance ) ) {
+                implicitBindToConstructor( instance );
+                return SuppliedBy.instance( instance );
+            }
+            if ( instance.getType().getRawType().isInterface() ) {
+                throw new IllegalArgumentException( "Interface type linked in a loop: "
+                        + resource.getInstance() + " > " + instance );
+            }
+            return SuppliedBy.costructor( binder.bind().inspector.constructorFor( instance.getType().getRawType() ) );
+        }
+
+        private <I> void implicitBindToConstructor( Instance<I> instance ) {
+            binder.implicitBindToConstructor( instance );
         }
     }
 

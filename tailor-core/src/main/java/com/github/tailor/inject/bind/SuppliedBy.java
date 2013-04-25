@@ -1,9 +1,6 @@
 package com.github.tailor.inject.bind;
 
-import com.github.tailor.inject.Dependency;
-import com.github.tailor.inject.Injector;
-import com.github.tailor.inject.Parameter;
-import com.github.tailor.inject.Supplier;
+import com.github.tailor.inject.*;
 import com.github.tailor.inject.bootstrap.Invoke;
 import com.github.tailor.inject.util.Argument;
 import com.github.tailor.inject.util.Metaclass;
@@ -34,6 +31,10 @@ public class SuppliedBy {
 
     public static <T> Supplier<T> constant(T constant) {
         return new ConstantSupplier<T>(constant);
+    }
+
+    public static <T> Supplier<T> instance(Instance<T> instance) {
+        return new InstanceSupplier<T>(instance);
     }
 
     private static final class ConstantSupplier<T> implements Supplier<T> {
@@ -91,6 +92,26 @@ public class SuppliedBy {
             return Invoke.constructor(constructor, Argument.resolve(dependency, injector, arguments));
         }
 
+    }
+
+    private static final class InstanceSupplier<T> implements Supplier<T> {
+
+        private final Instance<? extends T> instance;
+
+        InstanceSupplier(Instance<? extends T> instance) {
+            super();
+            this.instance = instance;
+        }
+
+        @Override
+        public T supply(Dependency<? super T> dependency, Injector injector) {
+            return injector.resolve(dependency.instanced(instance));
+        }
+
+        @Override
+        public String toString() {
+            return instance.toString();
+        }
     }
 
 }
