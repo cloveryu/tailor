@@ -10,6 +10,6 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({PrimitiveBindsTest.class, ConstructorParameterBindsTest.class, BootstrapperTest.class, LinkerTest.class,
-        InstanceTest.class, RobotLegsProblemBindsTest.class, ScopedBindsTest.class})
+        InstanceTest.class, RobotLegsProblemBindsTest.class, ScopedBindsTest.class, ScopesTest.class})
 public class BindSuite {
 }

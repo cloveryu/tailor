@@ -5,6 +5,7 @@ import com.github.tailor.inject.Name;
 import com.github.tailor.inject.Target;
 import com.github.tailor.inject.Type;
 
+import static com.github.tailor.inject.Instance.defaultInstanceOf;
 import static com.github.tailor.inject.Type.raw;
 
 /**
@@ -28,5 +29,13 @@ public class ScopedBinder extends TargetedBinder {
 
     public TargetedBinder injectingInto(Instance<?> target) {
         return new TargetedBinder(root, bind().with(Target.targeting(target)));
+    }
+
+    public TargetedBinder injectingInto( Class<?> target ) {
+        return injectingInto( raw(target) );
+    }
+
+    public TargetedBinder injectingInto( Type<?> target ) {
+        return injectingInto( defaultInstanceOf( target ) );
     }
 }

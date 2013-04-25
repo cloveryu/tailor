@@ -17,13 +17,13 @@ public class Scoped {
         <T> String deduceKey(Demand<T> demand);
     }
 
+    public static final KeyDeduction DEPENDENCY_TYPE_KEY = new DependencyTypeAsKey();
     public static final KeyDeduction TARGET_INSTANCE_KEY = new TargetInstanceAsKey();
 
     public static final Scope APPLICATION = new ApplicationScope();
-
     public static final Scope INJECTION = new InjectionScope();
-
     public static final Scope TARGET_INSTANCE = uniqueBy(TARGET_INSTANCE_KEY);
+    public static final Scope DEPENDENCY_TYPE = uniqueBy( DEPENDENCY_TYPE_KEY );
 
     public static Scope uniqueBy(KeyDeduction keyDeduction) {
         return new KeyDeductionScope(keyDeduction);
@@ -115,6 +115,23 @@ public class Scoped {
         @Override
         public String toString() {
             return "target-instance";
+        }
+
+    }
+
+    private static final class DependencyTypeAsKey implements KeyDeduction {
+
+        DependencyTypeAsKey() {
+        }
+
+        @Override
+        public <T> String deduceKey( Demand<T> demand ) {
+            return demand.getDependency().getType().toString();
+        }
+
+        @Override
+        public String toString() {
+            return "dependendy-type";
         }
 
     }

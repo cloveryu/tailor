@@ -58,28 +58,16 @@ public class Binder {
         return new Binder(root, bind);
     }
 
-    public <T> TypedBinder<T> multibind(Class<T> type) {
-        return multibind(raw(type));
-    }
-
-    public <T> TypedBinder<T> multibind(Type<T> type) {
-        return multibind(Instance.defaultInstanceOf(type));
-    }
-
-    public <T> TypedBinder<T> multibind(Instance<T> instance) {
-        return on(bind().asMulti()).bind(instance);
-    }
-
-    public <T> TypedBinder<T> multibind(Name name, Class<T> type) {
-        return multibind(instance(name, Type.raw(type)));
-    }
-
     public void construct(Class<?> type) {
         construct((defaultInstanceOf(raw(type))));
     }
 
     public void construct(Instance<?> instance) {
         bind(instance).toConstructor();
+    }
+
+    public void construct( Name name, Class<?> type ) {
+        construct( instance( name, raw( type ) ) );
     }
 
     protected final <I> void implicitBindToConstructor(Instance<I> instance) {

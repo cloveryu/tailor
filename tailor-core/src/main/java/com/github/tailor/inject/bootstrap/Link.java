@@ -26,6 +26,7 @@ public final class Link {
         IdentityHashMap<Scope, Expiry> map = new IdentityHashMap<Scope, Expiry>();
         map.put(Scoped.APPLICATION, Expiry.NEVER);
         map.put(Scoped.INJECTION, Expiry.expires(1000));
+        map.put( Scoped.DEPENDENCY_TYPE, Expiry.NEVER );
         map.put(Scoped.TARGET_INSTANCE, Expiry.NEVER);
         return map;
     }
