@@ -43,4 +43,8 @@ public final class Bind {
     public Bind with(Source source) {
         return new Bind(bindings, inspector, source, scope, target);
     }
+
+    public Bind with( Target target ) {
+        return new Bind( bindings, inspector, source, scope, target );
+    }
 }

@@ -1,7 +1,6 @@
 package com.github.tailor.inject.bind;
 
 import com.github.tailor.inject.*;
-import com.github.tailor.inject.util.Metaclass;
 
 import java.lang.reflect.Constructor;
 
@@ -105,4 +104,5 @@ public class Binder {
             to( SuppliedBy.costructor( binder.bind().inspector.constructorFor( impl ), parameters ) );
         }
     }
+
 }
