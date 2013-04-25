@@ -51,7 +51,7 @@ public class InstanceTest {
     private final Injector injector = Bootstrap.injector(InstanceBindsBundle.class);
 
     @Test
-    public void thatInstanceInjectedBasedOnTheDependencyType() {
+    public void shouldBeInjectedBasedOnTheDependencyType() {
         assertInjects( "bar", raw( CharSequence.class ) );
         assertInjects( "foobar", raw( String.class ) );
         assertInjects( 42, raw( Integer.class ) );

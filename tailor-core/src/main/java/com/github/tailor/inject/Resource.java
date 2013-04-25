@@ -48,4 +48,8 @@ public final class Resource<T> {
         return target;
     }
 
+    public <E> Resource<E> typed(Type<E> type) {
+        return new Resource<E>(instance.typed(type), target);
+    }
+
 }

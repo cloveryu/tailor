@@ -2,12 +2,15 @@ package com.github.tailor.inject.bootstrap;
 
 import com.github.tailor.inject.Array;
 import com.github.tailor.inject.Injector;
+import com.github.tailor.inject.Injectron;
 import com.github.tailor.inject.Inspector;
 import com.github.tailor.inject.util.Inject;
 import com.github.tailor.inject.util.Metaclass;
 import com.github.tailor.inject.util.Suppliable;
 
 import java.util.*;
+
+import static com.github.tailor.inject.Dependency.dependency;
 
 /**
  * User: Clover Yu
@@ -141,6 +144,10 @@ public class Bootstrap {
             }
         }
 
+    }
+
+    public static <T> T instance( Injectron<T> injectron ) {
+        return injectron.instanceFor( dependency( injectron.getResource().getInstance() ) );
     }
 
 }

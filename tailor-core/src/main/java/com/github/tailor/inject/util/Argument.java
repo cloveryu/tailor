@@ -11,6 +11,7 @@ import static com.github.tailor.inject.Type.*;
  */
 public final class Argument<T> implements Parameter {
 
+    @SuppressWarnings("unchecked")
     public static <T> Argument<T> argumentFor(Parameter parameter) {
         if (parameter instanceof Argument<?>) {
             return (Argument<T>) parameter;
@@ -131,7 +132,7 @@ public final class Argument<T> implements Parameter {
         return context.resolve(constructed.instanced(instance));
     }
 
-    public static <S, T extends S> Parameter asType( Class<S> supertype, Parameter parameter ) {
+    public static <S> Parameter asType( Class<S> supertype, Parameter parameter ) {
         return asType( raw(supertype), parameter );
     }
 

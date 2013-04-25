@@ -53,6 +53,18 @@ public class Binder {
         b.bindings.add(resource, supplier, b.scope, b.source);
     }
 
+    public <T> TypedBinder<T> autobind( Class<T> type ) {
+        return autobind( Type.raw( type ) );
+    }
+
+    public <T> TypedBinder<T> autobind( Type<T> type ) {
+        return on( bind().autobinding().asAuto() ).bind( type );
+    }
+
+    protected Binder on( Bind bind ) {
+        return new Binder( root, bind );
+    }
+
     public static class TypedBinder<T> {
 
         private final Binder binder;

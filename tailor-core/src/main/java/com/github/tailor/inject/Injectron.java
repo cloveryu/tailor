@@ -12,4 +12,5 @@ public interface Injectron<T> {
     Source getSource();
 
     T instanceFor(Dependency<? super T> dependency);
+
 }

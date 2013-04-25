@@ -23,4 +23,8 @@ public class Source {
     public DeclarationType getType() {
         return declarationType;
     }
+
+    public Source typed( DeclarationType type ) {
+        return declarationType == type ? this : new Source(ident, type );
+    }
 }
