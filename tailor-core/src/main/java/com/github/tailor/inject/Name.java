@@ -59,32 +59,32 @@ public final class Name {
         return value.isEmpty();
     }
 
-    public static Name namedBy( Class<? extends Annotation> annotation, Annotation... instances ) {
-        for ( Annotation i : instances ) {
-            if ( i.annotationType() == annotation ) {
-                return namedBy( annotation, i );
+    public static Name namedBy(Class<? extends Annotation> annotation, Annotation... instances) {
+        for (Annotation i : instances) {
+            if (i.annotationType() == annotation) {
+                return namedBy(annotation, i);
             }
         }
         return Name.DEFAULT;
     }
 
-    public static Name namedBy( Class<? extends Annotation> annotation, AnnotatedElement obj ) {
-        return annotation == null || !obj.isAnnotationPresent( annotation )
+    public static Name namedBy(Class<? extends Annotation> annotation, AnnotatedElement obj) {
+        return annotation == null || !obj.isAnnotationPresent(annotation)
                 ? Name.DEFAULT
-                : namedBy( annotation, obj.getAnnotation( annotation ) );
+                : namedBy(annotation, obj.getAnnotation(annotation));
     }
 
-    private static Name namedBy( Class<? extends Annotation> annotation, Annotation instance ) {
-        for ( Method m : annotation.getDeclaredMethods() ) {
-            if ( String.class == m.getReturnType() ) {
+    private static Name namedBy(Class<? extends Annotation> annotation, Annotation instance) {
+        for (Method m : annotation.getDeclaredMethods()) {
+            if (String.class == m.getReturnType()) {
                 String name = null;
                 try {
-                    name = (String) m.invoke( instance );
-                } catch ( Exception e ) {
+                    name = (String) m.invoke(instance);
+                } catch (Exception e) {
                     // to do ...
                 }
-                if ( name != null && !name.isEmpty() && !name.equals( m.getDefaultValue() ) ) {
-                    return Name.named( name );
+                if (name != null && !name.isEmpty() && !name.equals(m.getDefaultValue())) {
+                    return Name.named(name);
                 }
             }
         }

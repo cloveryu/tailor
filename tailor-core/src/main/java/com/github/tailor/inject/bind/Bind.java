@@ -10,8 +10,8 @@ import com.github.tailor.inject.bootstrap.Bindings;
  */
 public final class Bind {
 
-    public static Bindings autobinding( Bindings delegate ) {
-        return new AutobindBindings( delegate );
+    public static Bindings autobinding(Bindings delegate) {
+        return new AutobindBindings(delegate);
     }
 
     public static Bind create(Bindings bindings, Inspector inspector, Source source, Scope scope) {
@@ -50,11 +50,11 @@ public final class Bind {
     }
 
     public Bind autobinding() {
-        return into( autobinding( bindings ) );
+        return into(autobinding(bindings));
     }
 
     public Bind asAuto() {
-        return as( DeclarationType.AUTO );
+        return as(DeclarationType.AUTO);
     }
 
     public Bind asDefault() {
@@ -77,18 +77,18 @@ public final class Bind {
 
         private final Bindings delegate;
 
-        AutobindBindings( Bindings delegate ) {
+        AutobindBindings(Bindings delegate) {
             super();
             this.delegate = delegate;
         }
 
         @Override
-        public <T> void add( Resource<T> resource, Supplier<? extends T> supplier, Scope scope, Source source) {
-            delegate.add( resource, supplier, scope, source );
+        public <T> void add(Resource<T> resource, Supplier<? extends T> supplier, Scope scope, Source source) {
+            delegate.add(resource, supplier, scope, source);
             Type<T> type = resource.getType();
-            for ( Type<? super T> supertype : type.supertypes() ) {
-                if ( supertype.getRawType() != Object.class ) {
-                    delegate.add( resource.typed( supertype ), supplier, scope, source );
+            for (Type<? super T> supertype : type.supertypes()) {
+                if (supertype.getRawType() != Object.class) {
+                    delegate.add(resource.typed(supertype), supplier, scope, source);
                 }
             }
         }

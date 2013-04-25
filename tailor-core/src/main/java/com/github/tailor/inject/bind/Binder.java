@@ -29,12 +29,12 @@ public class Binder {
         return bind;
     }
 
-    public <T> TypedBinder<T> autobind( Class<T> type ) {
-        return autobind( Type.raw( type ) );
+    public <T> TypedBinder<T> autobind(Class<T> type) {
+        return autobind(Type.raw(type));
     }
 
-    public <T> TypedBinder<T> autobind( Type<T> type ) {
-        return on( bind().autobinding().asAuto() ).bind( type );
+    public <T> TypedBinder<T> autobind(Type<T> type) {
+        return on(bind().autobinding().asAuto()).bind(type);
     }
 
     public <T> TypedBinder<T> bind(Class<T> type) {
@@ -72,10 +72,6 @@ public class Binder {
 
     public void construct(Instance<?> instance) {
         bind(instance).toConstructor();
-    }
-
-    public void construct( Name name, Class<?> type ) {
-        construct( instance( name, raw( type ) ) );
     }
 
     protected final <I> void implicitBindToConstructor(Instance<I> instance) {
@@ -120,10 +116,6 @@ public class Binder {
             to(SuppliedBy.costructor(constructor, parameters));
         }
 
-        public <I extends T> void to(Name name, Class<I> type) {
-            to(instance(name, raw(type)));
-        }
-
         public <I extends T> void to(Instance<I> instance) {
             to(supply(instance));
         }
@@ -131,6 +123,10 @@ public class Binder {
         private TypedBinder<T> toConstant(T constant) {
             to(SuppliedBy.constant(constant));
             return this;
+        }
+
+        public <I extends T> void to(Name name, Class<I> type) {
+            to(instance(name, raw(type)));
         }
 
         public void to(Supplier<? extends T> supplier) {
@@ -162,8 +158,7 @@ public class Binder {
                 return SuppliedBy.instance(instance);
             }
             if (instance.getType().getRawType().isInterface()) {
-                throw new IllegalArgumentException("Interface type linked in a loop: "
-                        + resource.getInstance() + " > " + instance);
+                throw new IllegalArgumentException("Interface type linked in a loop: " + resource.getInstance() + " > " + instance);
             }
             return SuppliedBy.costructor(binder.bind().inspector.constructorFor(instance.getType().getRawType()));
         }

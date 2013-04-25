@@ -14,3 +14,4 @@ import org.junit.runners.Suite;
         BindSuite.class})
 public class TailorSuite {
 }
+

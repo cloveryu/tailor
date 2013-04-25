@@ -23,7 +23,7 @@ public class Scoped {
     public static final Scope APPLICATION = new ApplicationScope();
     public static final Scope INJECTION = new InjectionScope();
     public static final Scope TARGET_INSTANCE = uniqueBy(TARGET_INSTANCE_KEY);
-    public static final Scope DEPENDENCY_TYPE = uniqueBy( DEPENDENCY_TYPE_KEY );
+    public static final Scope DEPENDENCY_TYPE = uniqueBy(DEPENDENCY_TYPE_KEY);
 
     public static Scope uniqueBy(KeyDeduction keyDeduction) {
         return new KeyDeductionScope(keyDeduction);
@@ -63,6 +63,7 @@ public class Scoped {
             if (res != null) {
                 return res;
             }
+            //noinspection SynchronizeOnNonFinalField
             synchronized (instances) {
                 res = (T) instances[demand.envSerialNumber()];
                 if (res == null) {
@@ -125,7 +126,7 @@ public class Scoped {
         }
 
         @Override
-        public <T> String deduceKey( Demand<T> demand ) {
+        public <T> String deduceKey(Demand<T> demand) {
             return demand.getDependency().getType().toString();
         }
 

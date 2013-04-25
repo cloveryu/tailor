@@ -11,19 +11,19 @@ import java.util.*;
 public final class Type<T> implements Parameter {
 
     public static final Type<Object> OBJECT = Type.raw(Object.class);
-    public static final Type<Void> VOID = raw( Void.class );
+    public static final Type<Void> VOID = raw(Void.class);
     public static final Type<?> WILDCARD = OBJECT.asLowerBound();
 
-    public static Type<?> returnType( Method method ) {
-        return type( method.getGenericReturnType() );
+    public static Type<?> returnType(Method method) {
+        return type(method.getGenericReturnType());
     }
 
     public static Type<?>[] parameterTypes(Constructor<?> constructor) {
         return parameterTypes(constructor.getGenericParameterTypes());
     }
 
-    public static Type<?>[] parameterTypes( Method method ) {
-        return parameterTypes( method.getGenericParameterTypes() );
+    public static Type<?>[] parameterTypes(Method method) {
+        return parameterTypes(method.getGenericParameterTypes());
     }
 
     private static Type<?>[] parameterTypes(java.lang.reflect.Type[] genericParameterTypes) {
@@ -349,9 +349,6 @@ public final class Type<T> implements Parameter {
         return Modifier.isAbstract(rawType.getModifiers());
     }
 
-    public boolean isUnidimensionalArray() {
-        return rawType.isArray() && !rawType.getComponentType().isArray();
-    }
 }
 
 

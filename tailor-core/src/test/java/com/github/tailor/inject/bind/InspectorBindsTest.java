@@ -2,14 +2,13 @@ package com.github.tailor.inject.bind;
 
 import com.github.tailor.inject.Injector;
 import com.github.tailor.inject.bootstrap.Bootstrap;
-import com.github.tailor.inject.util.Scoped;
 import org.hamcrest.Factory;
 import org.junit.Test;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static com.github.tailor.inject.DIRuntimeException.*;
+import static com.github.tailor.inject.DIRuntimeException.NoSuchResourceException;
 import static com.github.tailor.inject.Dependency.dependency;
 import static com.github.tailor.inject.bootstrap.Inspect.all;
 import static java.lang.annotation.ElementType.METHOD;

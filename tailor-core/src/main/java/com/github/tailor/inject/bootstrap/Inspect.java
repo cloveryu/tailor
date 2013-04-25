@@ -51,15 +51,15 @@ public class Inspect implements Inspector {
     }
 
     public Inspect methods() {
-        return new Inspect( statics, true, false, packages, assignable, accessible, namedby );
+        return new Inspect(statics, true, false, packages, assignable, accessible, namedby);
     }
 
-    public Inspect annotatedWith( Class<? extends Annotation> annotation ) {
-        return new Inspect( statics, methods, constructors, packages, assignable, annotation, namedby);
+    public Inspect annotatedWith(Class<? extends Annotation> annotation) {
+        return new Inspect(statics, methods, constructors, packages, assignable, annotation, namedby);
     }
 
-    public Inspect namedBy( Class<? extends Annotation> annotation ) {
-        return new Inspect( statics, methods, constructors, packages, assignable, accessible, annotation);
+    public Inspect namedBy(Class<? extends Annotation> annotation) {
+        return new Inspect(statics, methods, constructors, packages, assignable, accessible, annotation);
     }
 
     @SuppressWarnings("unchecked")

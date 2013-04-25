@@ -9,15 +9,15 @@ import static com.github.tailor.inject.Type.raw;
  */
 public final class Resource<T> {
 
-    public static <T> Resource<T> resource( Class<T> type ) {
-        return new Resource<T>( Instance.anyOf( raw( type ) ) );
+    public static <T> Resource<T> resource(Class<T> type) {
+        return new Resource<T>(Instance.anyOf(raw(type)));
     }
 
     private final Instance<T> instance;
     private final Target target;
 
-    public Resource( Instance<T> instance ) {
-        this( instance, Target.ANY );
+    public Resource(Instance<T> instance) {
+        this(instance, Target.ANY);
     }
 
     public Resource(Instance<T> instance, Target target) {

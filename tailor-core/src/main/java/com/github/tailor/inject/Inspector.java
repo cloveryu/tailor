@@ -13,9 +13,9 @@ public interface Inspector {
 
     <T> Constructor<T> constructorFor(Class<T> type);
 
-    Parameter[] parametersFor( AccessibleObject obj );
+    Parameter[] parametersFor(AccessibleObject obj);
 
-    <T> Method[] methodsIn( Class<T> implementor );
+    <T> Method[] methodsIn(Class<T> implementor);
 
-    Name nameFor( AccessibleObject obj );
+    Name nameFor(AccessibleObject obj);
 }

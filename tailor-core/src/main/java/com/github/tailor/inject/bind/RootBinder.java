@@ -17,10 +17,6 @@ public class RootBinder extends ScopedBinder {
         super(root, bind);
     }
 
-    public RootBinder asDefault() {
-        return on(bind().asDefault());
-    }
-
     protected RootBinder on(Bind bind) {
         return new RootBinder(bind);
     }

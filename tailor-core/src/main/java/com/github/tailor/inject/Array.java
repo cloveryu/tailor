@@ -25,11 +25,11 @@ public final class Array {
         return list.toArray(newInstance(type, list.size()));
     }
 
-    @SuppressWarnings ( "unchecked" )
-    public static <T> T[] of( Collection<? extends T> list, T[] empty ) {
-        if ( list.isEmpty() ) {
+    @SuppressWarnings("unchecked")
+    public static <T> T[] of(Collection<? extends T> list, T[] empty) {
+        if (list.isEmpty()) {
             return empty;
         }
-        return of( list, (Class<T>) empty.getClass().getComponentType() );
+        return of(list, (Class<T>) empty.getClass().getComponentType());
     }
 }

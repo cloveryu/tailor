@@ -1,6 +1,5 @@
 package com.github.tailor.inject;
 
-import static com.github.tailor.inject.Packages.packageOf;
 import static com.github.tailor.inject.Type.raw;
 
 /**
@@ -83,11 +82,4 @@ public final class Target {
         return type.isInterface() || type.isAbstract() ? targetType.isAssignableTo(type) : targetType.equalTo(type);
     }
 
-    public Target inPackageOf(Class<?> type) {
-        return in(packageOf(type));
-    }
-
-    public Target in(Packages packages) {
-        return new Target(parents, instance, packages);
-    }
 }
