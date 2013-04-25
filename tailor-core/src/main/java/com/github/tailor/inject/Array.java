@@ -24,4 +24,12 @@ public final class Array {
     public static <T> T[] of(Collection<? extends T> list, Class<T> type) {
         return list.toArray(newInstance(type, list.size()));
     }
+
+    @SuppressWarnings ( "unchecked" )
+    public static <T> T[] of( Collection<? extends T> list, T[] empty ) {
+        if ( list.isEmpty() ) {
+            return empty;
+        }
+        return of( list, (Class<T>) empty.getClass().getComponentType() );
+    }
 }

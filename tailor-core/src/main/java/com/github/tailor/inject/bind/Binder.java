@@ -29,6 +29,14 @@ public class Binder {
         return bind;
     }
 
+    public <T> TypedBinder<T> autobind( Class<T> type ) {
+        return autobind( Type.raw( type ) );
+    }
+
+    public <T> TypedBinder<T> autobind( Type<T> type ) {
+        return on( bind().autobinding().asAuto() ).bind( type );
+    }
+
     public <T> TypedBinder<T> bind(Class<T> type) {
         return bind(raw(type));
     }

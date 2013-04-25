@@ -27,4 +27,8 @@ public class Source {
     public Source typed(DeclarationType type) {
         return declarationType == type ? this : new Source(ident, type);
     }
+
+    public Class<?> getIdent() {
+        return ident;
+    }
 }

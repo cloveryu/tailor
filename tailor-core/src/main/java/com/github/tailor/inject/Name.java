@@ -1,5 +1,9 @@
 package com.github.tailor.inject;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Method;
+
 /**
  * User: Clover Yu
  * Date: 4/24/13
@@ -49,6 +53,42 @@ public final class Name {
 
     public boolean isAny() {
         return value.equals(ANY.value);
+    }
+
+    public boolean isDefault() {
+        return value.isEmpty();
+    }
+
+    public static Name namedBy( Class<? extends Annotation> annotation, Annotation... instances ) {
+        for ( Annotation i : instances ) {
+            if ( i.annotationType() == annotation ) {
+                return namedBy( annotation, i );
+            }
+        }
+        return Name.DEFAULT;
+    }
+
+    public static Name namedBy( Class<? extends Annotation> annotation, AnnotatedElement obj ) {
+        return annotation == null || !obj.isAnnotationPresent( annotation )
+                ? Name.DEFAULT
+                : namedBy( annotation, obj.getAnnotation( annotation ) );
+    }
+
+    private static Name namedBy( Class<? extends Annotation> annotation, Annotation instance ) {
+        for ( Method m : annotation.getDeclaredMethods() ) {
+            if ( String.class == m.getReturnType() ) {
+                String name = null;
+                try {
+                    name = (String) m.invoke( instance );
+                } catch ( Exception e ) {
+                    // to do ...
+                }
+                if ( name != null && !name.isEmpty() && !name.equals( m.getDefaultValue() ) ) {
+                    return Name.named( name );
+                }
+            }
+        }
+        return Name.DEFAULT;
     }
 
 }

@@ -1,9 +1,6 @@
 package com.github.tailor.inject.bind;
 
-import com.github.tailor.inject.Instance;
-import com.github.tailor.inject.Name;
-import com.github.tailor.inject.Target;
-import com.github.tailor.inject.Type;
+import com.github.tailor.inject.*;
 
 import static com.github.tailor.inject.Instance.defaultInstanceOf;
 import static com.github.tailor.inject.Type.raw;
@@ -37,5 +34,9 @@ public class ScopedBinder extends TargetedBinder {
 
     public TargetedBinder injectingInto( Type<?> target ) {
         return injectingInto( defaultInstanceOf( target ) );
+    }
+
+    public InspectBinder bind( Inspector inspector ) {
+        return new InspectBinder( inspector, root, bind().scope );
     }
 }
