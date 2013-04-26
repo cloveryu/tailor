@@ -38,7 +38,7 @@ public class InspectorBindsTest {
         protected void declare() {
             bind(all().methods()).inModule();
             bind(all().methods().annotatedWith(Factory.class).namedBy(Resource.class)).in(InspectorBindsImplementor1.class);
-            bind(all().methods()).in( new InspectorBindsImplementor2( STATE ) );
+            bind(all().methods()).in(new InspectorBindsImplementor2(STATE));
         }
 
         static int staticFactoryMethod() {
@@ -91,37 +91,37 @@ public class InspectorBindsTest {
 
     @Test
     public void thatInstanceFactoryMethodIsAvailable() {
-        assertEquals( 42f, injector.resolve( dependency( float.class ) ).floatValue(), 0.01f );
+        assertEquals(42f, injector.resolve(dependency(float.class)).floatValue(), 0.01f);
     }
 
     @Test
     public void thatStaticFactoryMethodIsAvailable() {
-        assertEquals( 42, injector.resolve( dependency( int.class ) ).intValue() );
+        assertEquals(42, injector.resolve(dependency(int.class)).intValue());
     }
 
     @Test
     public void thatInstanceFactoryMethodWithParametersIsAvailable() {
-        assertEquals( 42d, injector.resolve( dependency( double.class ) ).doubleValue(), 0.01d );
+        assertEquals(42d, injector.resolve(dependency(double.class)).doubleValue(), 0.01d);
     }
 
     @Test
     public void thatStaticFactoryMethodWithParametersIsAvailable() {
-        assertEquals( 84L, injector.resolve( dependency( long.class ) ).longValue() );
+        assertEquals(84L, injector.resolve(dependency(long.class)).longValue());
     }
 
     @Test
     public void thatNamedWithAnnotationCanBeUsedToGetNamedResources() {
-        assertEquals( 42d, injector.resolve(dependency( double.class ).named( "foo" ) ).doubleValue(), 0.01d );
+        assertEquals(42d, injector.resolve(dependency(double.class).named("foo")).doubleValue(), 0.01d);
     }
 
-    @Test ( expected = NoSuchResourceException.class )
+    @Test(expected = NoSuchResourceException.class)
     public void thatNoMethodsAreBoundThatAreNotAssignableToSpecifiedType() {
-        injector.resolve( dependency( String.class ) );
+        injector.resolve(dependency(String.class));
     }
 
     @Test
     public void thatMethodsAreBoundToSpecificInstance() {
-        assertSame( STATE, injector.resolve( dependency( StringBuffer.class ) ) );
+        assertSame(STATE, injector.resolve(dependency(StringBuffer.class)));
     }
 
 }
