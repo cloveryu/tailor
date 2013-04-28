@@ -57,7 +57,7 @@ public class PizzaStoreTest {
     static class XianPizzaStoreBindsModule extends BinderModule {
 
         @Override
-        protected void declare() {
+         protected void declare() {
             bind(all().methods().namedBy(Resource.class)).inModule();
             bind(PizzaStore.class).toConstructor(raw(Pizza.class), instance(named("storeName"), raw(String.class)));
         }
